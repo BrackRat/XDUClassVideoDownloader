@@ -21,10 +21,10 @@ def main(liveid=None, command='', single=0, merge=True):
         merge = user_input_with_check("是否自动合并上下半节课视频？(Y/n):", lambda x: x.lower() in ['', 'y', 'n']).lower() != 'n'
         # 跳过一定的周数，直到大于此值
         skip_input = user_input_with_check(
-            "是否从某个周数才开始下载？输入周数（如 3）或直接回车表示从第一周开始：",
+            "是否从某个周数才开始下载？输入周数（如 3 则从第三周开始下载）或直接回车表示从第一周开始：",
             lambda x: x.isdigit() or x == ''
         ).strip()
-        skip_until = int(skip_input) if skip_input.isdigit() else 0
+        skip_until = int(skip_input) - 1 if skip_input.isdigit() else 0
         if skip_until < 0:
             raise ValueError("跳过的周数不能为负数")
     else:
